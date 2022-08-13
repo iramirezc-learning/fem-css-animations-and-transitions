@@ -7,8 +7,11 @@
   --input-height: 3rem;
   --transition-duration: 0.3s;
   --transition-easing: cubic-bezier(0.5, 0, 0.5, 1);
-  --animation-duration: 0.8s;
+  --animation-duration: 0.5s;
+  --animation-stagger: 0.2s;
+  --animation-delay: calc(var(--animation-duration) - var(--animation-stagger));
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -30,22 +33,30 @@ body {
   will-change: transform;
 
   --color: var(--color-gray);
+
   &:focus-within {
     --color: var(--color-blue);
   }
 
   animation: slide-up var(--animation-duration) var(--transition-easing);
 
-  > .ui-input,
-  > .ui-button {
+  >.ui-input,
+  >.ui-button {
     // Add animations here
+    animation-duration: var(--animation-duration);
+    animation-delay: var(--animation-delay);
+    animation-fill-mode: both;
   }
 
-  > .ui-input {
+  >.ui-input {
     // ...
+    animation-name: move-right;
   }
-  > .ui-button {
+
+  >.ui-button {
     // ...
+    animation-name: move-left;
+    animation-delay: calc(var(--animation-delay) * 2);
   }
 }
 
@@ -57,6 +68,11 @@ body {
   border-radius: 0.25rem;
   outline: none;
   transition: inherit;
+
+  &:invalid:not(:focus) {
+    border-color: red;
+    animation: shake 0.5s;
+  }
 }
 
 .ui-button {
@@ -84,6 +100,7 @@ body {
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -91,20 +108,43 @@ body {
 }
 
 @keyframes shake {
+
   20%,
   40%,
   60%,
   80% {
-    transform: translateX(1%);
+    transform: translateX(2%);
   }
+
   10%,
   30%,
   50%,
   70%,
   90% {
-    transform: translateX(-1%);
+    transform: translateX(-2%);
   }
+
   from,
+  to {
+    transform: none;
+  }
+}
+
+@keyframes move-right {
+  from {
+    transform: translateX(-150%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes move-left {
+  from {
+    transform: translateX(150%);
+  }
+
   to {
     transform: none;
   }
