@@ -38,26 +38,10 @@ body {
     --color: var(--color-blue);
   }
 
-  animation: slide-up var(--animation-duration) var(--transition-easing);
+  --total-animation-duration: 1.75s;
 
-  >.ui-input,
-  >.ui-button {
-    // Add animations here
-    animation-duration: var(--animation-duration);
-    animation-delay: var(--animation-delay);
-    animation-fill-mode: both;
-  }
-
-  >.ui-input {
-    // ...
-    animation-name: move-right;
-  }
-
-  >.ui-button {
-    // ...
-    animation-name: move-left;
-    animation-delay: calc(var(--animation-delay) * 2);
-  }
+  animation: slide-up var(--animation-duration) var(--transition-easing),
+  shake var(--animation-duration) var(--total-animation-duration);
 }
 
 .ui-input {
@@ -68,6 +52,8 @@ body {
   border-radius: 0.25rem;
   outline: none;
   transition: inherit;
+
+  animation: move-right var(--animation-duration) var(--animation-delay) both;
 
   &:invalid:not(:focus) {
     border-color: red;
@@ -85,6 +71,10 @@ body {
   height: var(--input-height);
   background-color: var(--color);
   transition: inherit;
+
+  animation:
+    move-left var(--animation-duration) calc(var(--animation-delay) * 2) both,
+    shake-button var(--animation-duration) calc(var(--animation-delay) * 4);
 }
 
 [data-show]:not([data-active]) {
@@ -127,6 +117,24 @@ body {
   from,
   to {
     transform: none;
+  }
+}
+
+@keyframes shake-button {
+
+  from,
+  to {
+    transform: none;
+  }
+
+  20%,
+  60% {
+    transform: rotate(-0.01turn)
+  }
+
+  40%,
+  80% {
+    transform: rotate(0.01turn)
   }
 }
 
