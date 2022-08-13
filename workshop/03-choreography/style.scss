@@ -42,6 +42,10 @@ body {
 
   animation: slide-up var(--animation-duration) var(--transition-easing),
   shake var(--animation-duration) var(--total-animation-duration);
+
+  >.ui-input-wrapper {
+    animation: move-right var(--animation-duration) var(--animation-delay) both;
+  }
 }
 
 .ui-input {
@@ -52,8 +56,6 @@ body {
   border-radius: 0.25rem;
   outline: none;
   transition: inherit;
-
-  animation: move-right var(--animation-duration) var(--animation-delay) both;
 
   &:invalid:not(:focus) {
     border-color: red;
