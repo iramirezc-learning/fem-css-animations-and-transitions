@@ -20,10 +20,6 @@ body {
     .ui-content {
       display: none;
     }
-
-    .ui-caption {
-      font-size: 1.5rem;
-    }
   }
 
   &[data-state='expanded'] {
@@ -71,33 +67,26 @@ body {
     transform-origin: top left;
   }
 
-  // Add invert styles here to :before
-  &[data-flip="invert"]:before {
+  >.ui-caption {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+
+    --transition-duration: 0.7s;
+  }
+}
+
+[data-flip] {
+
+  &[data-flip-bg][data-flip="invert"]:before,
+  &:not([data-flip-bg])[data-flip="invert"] {
     transform:
       translate(calc(var(--dx) * 1px), calc(var(--dy) * 1px)) scale(var(--dw), var(--dh));
   }
 
-  // Add play styles here to :before
-  &[data-flip="play"]:before {
+  &[data-flip-bg][data-flip="play"]:before,
+  &:not([data-flip-bg])[data-flip="play"] {
     transform: none;
-    transition: transform var(--transition-duration);
-  }
-
-  >.ui-caption {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-
-    // Add invert styles here to :before
-    &[data-flip="invert"] {
-      transform:
-        translate(calc(var(--dx) * 1px), calc(var(--dy) * 1px)) scale(var(--dw), var(--dh));
-    }
-
-    // Add play styles here to 
-    &[data-flip="play"] {
-      transform: none;
-      transition: transform var(--transition-duration);
-    }
+    transition: transform var(--transition-duration, 1s);
   }
 }

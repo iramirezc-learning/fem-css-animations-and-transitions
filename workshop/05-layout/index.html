@@ -11,7 +11,7 @@
 
 <body>
   <div id="app" data-state="collapsed">
-    <figure class="ui-figure">
+    <figure class="ui-figure" data-flip-bg>
       <figcaption class="ui-caption">Animation</figcaption>
     </figure>
     <div class="ui-content">
@@ -57,17 +57,18 @@
     }
   }
 
-  function flip(el) {
-    const first = getProps(el)
+  function flip(elements = []) {
+    const firstEls = elements.map(getProps)
 
     requestAnimationFrame(() => {
-      const last = getProps(el)
+      const lastEls = elements.map(getProps)
 
-      setProps(el, calcDelta(first, last))
+      elements.forEach((el, i) => {
+        setProps(el, calcDelta(firstEls[i], lastEls[i]))
+        el.dataset.flip = "invert"
+      })
 
-      el.dataset.flip = "invert"
-
-      requestAnimationFrame(() => el.dataset.flip = "play")
+      requestAnimationFrame(() => elements.forEach(el => el.dataset.flip = "play"))
     })
   }
 
@@ -76,8 +77,8 @@
     const nextState = currentState === "collapsed" ? "expanded" : "collapsed"
     const setNextState = () => app.dataset.state = nextState
 
-    flip(figureEl)
-    flip(captionEl)
+    flip([figureEl, captionEl])
+
     setNextState()
   });
 </script>
