@@ -1,26 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>States</title>
-    <link rel="stylesheet" href="style.scss" />
-  </head>
-  <body>
-    <form class="ui-form" data-state="subscribe">
-      <input class="ui-input" type="email" placeholder="your@email.com" />
-      <button class="ui-button" type="button" onclick="setState('subscribing')">
-        <span>Subscribe</span>
-        <span>Subscribing</span>
-        <span>Success!</span>
-        <span>Error</span>
-      </button>
-    </form>
-  </body>
-  <script>
-    const form = document.querySelector('.ui-form');
 
-    // ...
-  </script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>States</title>
+  <link rel="stylesheet" href="style.scss" />
+</head>
+
+<body>
+  <form class="ui-form" data-state="ready">
+    <input class="ui-input" type="email" placeholder="your@email.com" />
+    <button class="ui-button" type="button">
+      <span>Subscribe</span>
+    </button>
+  </form>
+</body>
+<script>
+  const TIMEOUT = 3000
+  const form = document.querySelector('.ui-form');
+  const subscribeBtn = document.querySelector("button")
+
+  const machine = {
+    initialState: "ready",
+    states: {
+      ready: {
+        on: { CLICK: "subscribing" }
+      },
+      subscribing: {
+        on: { SUCCESS: "success", ERROR: "error" },
+      },
+      success: {
+        on: { CLICK: "ready" }
+      },
+      error: {
+        on: { CLICK: "ready" }
+      }
+    }
+  }
+
+  subscribeBtn.addEventListener("click", () => {
+    const currentState = form.dataset.state ?? machine.initialState
+    const nextState = machine.states[currentState].on["CLICK"] ?? currentState
+
+    form.dataset.state = nextState
+
+    if (nextState === "subscribing") {
+      setTimeout(() => {
+        const isSuccess = Math.random() <= 0.5
+        const nextState = machine.states["subscribing"].on[isSuccess ? "SUCCESS" : "ERROR"]
+
+        form.dataset.state = nextState
+      }, TIMEOUT)
+    }
+  })
+</script>
+
 </html>
