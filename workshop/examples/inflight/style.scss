@@ -45,7 +45,7 @@ aside {
     'items'
     'search';
 
-  > .ui-nav-items {
+  >.ui-nav-items {
     grid-area: items;
   }
 }
@@ -65,7 +65,7 @@ main {
   grid-area: main;
   overflow: hidden;
 
-  > section {
+  >section {
     position: absolute;
     top: 0;
     left: 0;
@@ -103,12 +103,14 @@ main {
   flex-direction: column;
   gap: 1rem;
   min-width: 50%;
-  // animation: slide-up 0.6s both;
+  animation: slide-up 0.6s both;
 }
+
 .ui-interest-header {
   border-bottom: 1px solid #fff6;
   text-transform: uppercase;
 }
+
 .ui-interest-details {
   display: flex;
   flex-direction: row;
@@ -136,16 +138,16 @@ main {
   display: grid;
   grid-template-rows: 3rem 1fr;
   grid-template-columns: 1fr;
-  grid-template-areas: 'header' 'movies';
+  grid-template-areas: 'header''movies';
   grid-row-gap: 2rem;
   opacity: 1;
-  // transition: opacity 0.3s;
+  transition: opacity 0.3s;
 
   &:not([data-active]) {
     opacity: 0;
   }
 
-  > .ui-screen-header {
+  >.ui-screen-header {
     grid-area: header;
   }
 }
@@ -153,11 +155,11 @@ main {
 .ui-movies {
   display: flex;
   flex-direction: row;
-  // justify-content: flex-start;
+  justify-content: flex-start;
   gap: 2rem;
   overflow-x: auto;
 
-  &:hover > .ui-movie:not(:hover) {
+  &:hover>.ui-movie:not(:hover) {
     opacity: 0.5;
   }
 }
@@ -172,13 +174,14 @@ main {
   aspect-ratio: 0.6;
   height: 40vh;
   flex-shrink: 0;
-  // animation: shift-up 0.3s calc(var(--i) * 0.1s) backwards;
-  // transition: opacity 0.3s;
+  animation: shift-up 0.3s calc(var(--i) * 0.1s) backwards;
+  transition: opacity 0.3s;
   font-weight: 400;
 
   &:first-child {
     margin-left: 2rem;
   }
+
   &:last-child {
     margin-right: 2rem;
   }
@@ -189,6 +192,7 @@ main {
     opacity: 0;
     transform: translateY(25%);
   }
+
   to {
     transform: none;
   }
@@ -211,7 +215,7 @@ main {
   height: 3rem;
   display: flex;
   align-items: center;
-  // padding: 1rem 2rem 1rem 3rem;
+  padding: 1rem 2rem 1rem 3rem;
 
   &:hover,
   &[data-active] {
@@ -258,7 +262,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  // transition: all 0.3s;
+  transition: all 0.3s;
   display: block;
 
   .ui-figure {
@@ -295,7 +299,7 @@ main {
   align-items: center;
   font-weight: 600;
   cursor: pointer;
-  // transition: all 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     background-color: var(--color-secondary-light);
@@ -321,6 +325,7 @@ main {
   from {
     transform: translateY(100%);
   }
+
   to {
     transform: none;
   }
@@ -330,6 +335,7 @@ main {
   from {
     transform: none;
   }
+
   to {
     transform: translateY(100%);
   }
@@ -342,16 +348,16 @@ main {
   display: grid;
   grid-template-rows: 3rem 1fr;
   grid-template-columns: 1fr;
-  grid-template-areas: 'header' 'music';
+  grid-template-areas: 'header''music';
   grid-row-gap: 2rem;
   opacity: 1;
-  // transition: opacity 0.3s;
+  transition: opacity 0.3s;
 
   &:not([data-active]) {
     opacity: 0;
   }
 
-  > .ui-screen-header {
+  >.ui-screen-header {
     grid-area: header;
   }
 }
@@ -382,11 +388,12 @@ main {
   width: 20vw;
   flex-shrink: 0;
   background-color: var(--color-bg-dark);
-  // animation: shift-up 0.3s calc(var(--i) * 0.1s) both;
+  animation: shift-up 0.3s calc(var(--i) * 0.1s) both;
 
   &:first-child {
     margin-left: 2rem;
   }
+
   &:last-child {
     margin-right: 2rem;
   }
@@ -396,7 +403,7 @@ main {
   padding: 2rem;
   font-weight: 400;
 
-  > small {
+  >small {
     font-weight: 300;
     display: block;
     opacity: 0.8;
@@ -421,15 +428,17 @@ main {
 
   .ui-logo {
     font-size: 5rem;
-    // animation: welcome-logo 2s ease-in-out both;
+    animation: welcome-logo 2s ease-in-out both;
     line-height: 1;
   }
+
   .ui-title {
     margin: 0;
-    // animation: welcome-title 2s ease-in-out both;
+    animation: welcome-title 2s ease-in-out both;
   }
+
   .ui-button {
-    // animation: welcome-button 2s 0.1s ease-in-out both;
+    animation: welcome-button 2s 0.1s ease-in-out both;
   }
 }
 
@@ -441,31 +450,38 @@ main {
   from {
     transform: translateY(100%) scale(0);
   }
+
   50% {
     transform: translateY(100%) scale(1);
   }
+
   to {
     transform: none;
   }
 }
 
 @keyframes welcome-title {
+
   from,
   50% {
     opacity: 0;
     transform: translateY(2rem);
   }
+
   to {
     opacity: 1;
     transform: none;
   }
 }
+
 @keyframes welcome-button {
+
   from,
   55% {
     opacity: 0;
     transform: translateY(2rem);
   }
+
   to {
     opacity: 1;
     transform: none;
