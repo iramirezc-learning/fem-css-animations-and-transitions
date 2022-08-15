@@ -1,18 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reactive</title>
-    <link rel="stylesheet" href="style.scss" />
-  </head>
-  <body>
-    <div class="circle"></div>
-  </body>
-  <script>
-    const circleEl = document.querySelector('.circle');
 
-    // ...
-  </script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reactive</title>
+  <link rel="stylesheet" href="style.scss" />
+</head>
+
+<body>
+  <div class="circle"></div>
+</body>
+<script>
+  const circleEl = document.querySelector('.circle');
+  const current = { x: 0, y: 0 }
+  const target = { x: 0, y: 0 }
+
+  let isLearping = false
+
+  function lerp() {
+    const dx = target.x - current.x
+    const dy = target.y - current.y
+
+    current.x += dx * 0.05
+    current.y += dy * 0.05
+
+    circleEl.style.setProperty("--x", current.x)
+    circleEl.style.setProperty("--y", current.y)
+
+    if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
+      isLearping = false
+      return
+    }
+
+    requestAnimationFrame(lerp)
+  }
+
+  function doLerp() {
+    if (!isLearping) {
+      isLearping = true
+      lerp()
+    }
+  }
+
+  document.addEventListener("pointermove", (ev) => {
+    const { clientX, clientY } = ev
+
+    target.x = clientX
+    target.y = clientY
+
+    doLerp()
+  })
+</script>
+
 </html>

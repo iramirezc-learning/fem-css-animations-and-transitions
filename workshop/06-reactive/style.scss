@@ -1,8 +1,14 @@
 @import '../styles/base.scss';
 
 .circle {
-  height: 5vmin;
-  width: 5vmin;
+  height: 10vmin;
+  width: 10vmin;
   border-radius: 50%;
-  background-color: blue;
+  background-color: limegreen;
+
+  --offset: 50%;
+  --x-px: calc(calc(var(--x) * 1px) - var(--offset));
+  --y-px: calc(calc(var(--y) * 1px) - var(--offset));
+
+  transform: translate(var(--x-px), var(--y-px));
 }
