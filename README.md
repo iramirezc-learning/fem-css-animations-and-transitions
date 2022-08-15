@@ -14,9 +14,9 @@ Personal repository for the course [CSS Animations and Transitions](https://fron
 
 🏁 **Started On:** Ago 12, 2022
 
-✅ **Completed On:** ???
+✅ **Completed On:** Ago 14, 2022
 
-🍅 **Total Pomodoro Time:** ???
+🍅 **Total Pomodoro Time:** ~ 15 hours, 25 minutes
 
 ## Course Resources
 
